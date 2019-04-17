@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.json({hello: 'world!'});
 });
 
 router.get('/pdf', async (req, res, next) => {
