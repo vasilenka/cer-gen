@@ -1,0 +1,9 @@
+@import './app/assets/sass/tokens/index.scss';
+@import './app/assets/sass/base/index.scss';
+
+body {
+  font-family: $font-primary;
+  font-size: rem(16px);
+  color: $dark-alpha-80;
+  background-color: $light-hex-100;
+}
