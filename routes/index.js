@@ -7,19 +7,24 @@ router.get('/', function(req, res, next) {
   res.json({hello: 'world!'});
 });
 
-router.get('/pdf', async (req, res, next) => {
+router.get('/pdf/:name', async (req, res, next) => {
+  let name = req.params.name
+  console.log("NAME: ", name)
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto('http://localhost:3000', {waitUntil: 'networkidle0'});
+  await page.goto(`http://localhost:3000/generate-pdf?name=${name}`, {waitUntil: 'networkidle0'});
   const pdf = await page.pdf({
-    format: 'A3',
+    // path: `./ce4_${name.replace(' ', '_').toLowerCase()}.pdf`,
+    format: 'A4',
     landscape: true,
     printBackground: true,
   });
 
-  await browser.close();
   // return pdf
+  res.type('application/pdf')
   res.send(pdf)
+
+  await browser.close();
 })
 
 
