@@ -15,6 +15,6 @@ app.use(cookieParser())
 
 app.use('/', require('./routes/home'))
 app.use('/pdf', require('./routes/pdf'))
-app.use('/users', require('./routes/participant'))
+app.use('/participants', require('./routes/participant'))
 
 module.exports = app

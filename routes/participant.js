@@ -3,6 +3,7 @@ var router = express.Router();
 const GoogleSpreadsheet = require('google-spreadsheet')
 const creds = require('./../keys/client_secret.json')
 const fs = require('fs')
+const participant = require('./../participant')
 
 router.get('/', function(req, res, next) {
 
@@ -12,19 +13,17 @@ router.get('/', function(req, res, next) {
     doc.getRows(1, (err, rows) => {
       let data = rows.map(row => ({
         no: row.no,
-        id: row.id,
         name: row.name,
         email: row.email
       }))
-      fs.writeFileSync('./participant.js', `module.exports = ${JSON.stringify(data)}`, (err) => {
-        if(!err) {
-          return res.status(200).json({success: 'berhasil'})
-        }
-        return res.status(500).json({error: 'gagal'})
-      })
+      fs.writeFileSync('./participant.js', `module.exports = ${JSON.stringify(data)}`)
     })
   )
 
+});
+
+router.get('/all', function(req, res, next) {
+  res.status(200).json(participant)
 });
 
 module.exports = router;
