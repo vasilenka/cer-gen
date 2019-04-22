@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const puppeteer = require('puppeteer');
-const data = require('./../participant')
+const data = require('./../participants/participants')
 
 router.get('/:email', async (req, res, next) => {
   let email = req.params.email.trim()

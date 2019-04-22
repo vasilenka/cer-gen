@@ -3,7 +3,7 @@ var router = express.Router();
 const GoogleSpreadsheet = require('google-spreadsheet')
 const creds = require('./../keys/client_secret.json')
 const fs = require('fs')
-const participant = require('./../participant')
+const participant = require('./../participants/participants')
 
 router.get('/', function(req, res, next) {
 
@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
         name: row.name,
         email: row.email
       }))
-      fs.writeFileSync('./participant.js', `module.exports = ${JSON.stringify(data)}`)
+      fs.writeFileSync('./participants/participants.js', `module.exports = ${JSON.stringify(data)}`)
     })
   )
 
